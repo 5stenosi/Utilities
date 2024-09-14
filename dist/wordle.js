@@ -1,7 +1,19 @@
-const word = "STENO"; // Parola da indovinare
+// Parole da indovinare
+const words = ["STENO", "APPLE", "HOUSE", "PLANE", "TRAIN", "BRAVE", "CRANE", "SHINE", "GREAT", "SMART"];
+
+// Funzione per selezionare una parola casuale
+function getRandomWord() {
+    const randomIndex = Math.floor(Math.random() * words.length);
+    return words[randomIndex];
+}
+
+// Variabile per la parola da indovinare
+let word = getRandomWord(); // Parola da indovinare
+
 let currentRow = 0;
 let currentCol = 0;
 let disabledLetters = [];
+let animatedCells = [];
 
 const grid = document.getElementById('grid');
 const cellTemplate = document.getElementById('grid-cell-template');
@@ -57,11 +69,15 @@ function createKey(key, row) {
 
 // Gestisce la pressione di un tasto
 function handleKeyPress(key) {
-    if (currentCol < 5 && !disabledLetters.includes(key)) {
+    if (currentCol < 5) {
         const cell = grid.children[currentRow * 5 + currentCol];
         cell.textContent = key;
         // Cambia lo sfondo quando viene inserita una lettera
-        cell.classList.add('bg-neutral-500');
+        cell.classList.add('bg-neutral-500', 'animate-bounce');
+
+        // Aggiungi la cella all'array delle celle animate
+        animatedCells.push(cell);
+
         currentCol++;
     }
 }
@@ -78,7 +94,7 @@ function handleSpecialKeyPress(key) {
 // Gestisce la pressione dei tasti della tastiera fisica
 document.addEventListener('keydown', (e) => {
     const key = e.key.toUpperCase();
-    if (isLetterKey(key) && !disabledLetters.includes(key)) {
+    if (isLetterKey(key)) {
         handleKeyPress(key);
     } else {
         handleSpecialKeyPress(key);
@@ -150,13 +166,32 @@ function checkWord() {
         }
 
         if (guess === word) {
-            alert('Hai indovinato!');
+            // Rimuovi l'animazione dalle celle dopo che la parola è stata controllata
+            animatedCells.forEach(cell => {
+                cell.classList.remove('animate-bounce');
+            });
+
+            // Svuota l'array delle celle animate
+            animatedCells = [];
+
+            // Aggiungi un ritardo di 500ms prima di mostrare l'avviso di vittoria
+            setTimeout(() => {
+                alert('Hai indovinato!');
+                resetGame(); // Resetta il gioco
+            }, 500);
         } else {
             alert('Riprova!');
         }
         currentRow++;
         currentCol = 0;
     }
+    // Rimuovi l'animazione dalle celle dopo che la parola è stata controllata
+    animatedCells.forEach(cell => {
+        cell.classList.remove('animate-bounce');
+    });
+
+    // Svuota l'array delle celle animate
+    animatedCells = [];
 }
 
 // Funzione per disabilitare una lettera
@@ -166,10 +201,8 @@ function disableLetter(letter) {
         const keyElements = document.querySelectorAll('.key');
         keyElements.forEach(keyElement => {
             if (keyElement.textContent === letter) {
-                keyElement.classList.add('brightness-50', 'cursor-default'); // Cambia il colore dello sfondo
+                keyElement.classList.add('brightness-50'); // Cambia il colore dello sfondo
                 keyElement.classList.remove('hover:bg-neutral-500', 'hover:scale-110'); // Rimuovi l'effetto hover
-                keyElement.classList.add('disabled'); // Aggiungi una classe per disabilitare il tasto
-                keyElement.removeEventListener('click', handleKeyPress);
             }
         });
     }
@@ -182,8 +215,40 @@ function deleteLetter() {
         const cell = grid.children[currentRow * 5 + currentCol];
         cell.textContent = '';
         // Ripristina lo sfondo predefinito quando la cella è vuota
-        cell.classList.remove('bg-neutral-500');
+        cell.classList.remove('bg-neutral-500', 'animate-bounce');
+
+        // Rimuovi la cella dall'array delle celle animate
+        const index = animatedCells.indexOf(cell);
+        if (index > -1) {
+            animatedCells.splice(index, 1);
+        }
     }
+}
+
+// Funzione per resettare il gioco
+function resetGame() {
+    currentRow = 0;
+    currentCol = 0;
+    disabledLetters = [];
+    word = getRandomWord(); // Scegli una nuova parola casuale
+
+    // Svuota la griglia
+    while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+    }
+    initializeGrid();
+
+    // Svuota la tastiera
+    while (row1.firstChild) {
+        row1.removeChild(row1.firstChild);
+    }
+    while (row2.firstChild) {
+        row2.removeChild(row2.firstChild);
+    }
+    while (row3.firstChild) {
+        row3.removeChild(row3.firstChild);
+    }
+    initializeKeyboard();
 }
 
 // Inizializza la griglia e la tastiera
