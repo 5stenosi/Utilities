@@ -58,8 +58,8 @@ function createKey(key, row) {
         keyElement.addEventListener('click', () => handleSpecialKeyPress(key));
 
         // Rimuovi la larghezza predefinita e aggiungi una nuova classe di larghezza con Tailwind CSS
-        keyElement.classList.remove('w-9', 'h-9', 'sm:w-14', 'sm:h-14');
-        keyElement.classList.add('w-16', 'sm:w-20');
+        keyElement.classList.remove('w-7', 'h-7', 'sm:w-14', 'sm:h-14');
+        keyElement.classList.add('w-14', 'sm:w-20');
     } else {
         keyElement.addEventListener('click', () => handleKeyPress(key));
     }
