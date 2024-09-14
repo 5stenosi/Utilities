@@ -11,12 +11,22 @@
 
 </head>
 
-<body class="bg-neutral-900 flex justify-center items-center h-screen">
+<body>
 
-    <button
-        class="border px-5 py-3 rounded-2xl border-neutral-600 text-white text-7xl hover:bg-neutral-500 transition-all">
-        <a href="wordle.html">WORDLE</a>
-    </button>
+    <div id="wrapper"
+        class="bg-stone-200 dark:bg-neutral-900 flex justify-center items-center h-screen flex-col space-y-5 duration-1000">
+        <button
+            class="border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-7xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-150">
+            <a href="wordle.html">WORDLE</a>
+        </button>
+        <!-- CHANGE THEME -->
+        <button id="change-theme"
+            class="border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-5xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-150">
+            LIGHT
+        </button>
+    </div>
+
+    <script src="darkmode.js"></script>
 
 </body>
 

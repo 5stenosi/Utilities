@@ -12,34 +12,44 @@
 
 </head>
 
-<body class="bg-neutral-900 flex justify-center items-center h-screen flex-col">
+<body>
 
-    <!-- Grid -->
-    <div id="grid" class="grid grid-cols-5 grid-rows-6 gap-2">
-        <!-- Celle della griglia -->
-    </div>
-
-    <!-- TEMPLATE Cell -->
-    <template id="grid-cell-template">
-        <div class="size-14 border border-neutral-600 flex items-center justify-center text-white text-2xl font-bold">
+    <div id="wrapper" class="bg-stone-200 dark:bg-neutral-900 flex justify-center items-center h-screen flex-col duration-1000">
+        <!-- Grid -->
+        <div id="grid" class="grid grid-cols-5 grid-rows-6 gap-2">
+            <!-- Celle della griglia -->
         </div>
-    </template>
 
-    <!-- Keyboard -->
-    <div id="keyboard" class="m-10">
-        <!-- Keyboard Rows -->
-        <div id="row1" class="flex justify-center"></div>
-        <div id="row2" class="flex justify-center"></div>
-        <div id="row3" class="flex justify-center"></div>
+        <!-- TEMPLATE Cell -->
+        <template id="grid-cell-template">
+            <div
+                class="size-14 border border-stone-600 dark:border-neutral-700 flex items-center justify-center text-stone-600 dark:text-white text-2xl font-bold">
+            </div>
+        </template>
+
+        <!-- Keyboard -->
+        <div id="keyboard" class="m-10">
+            <!-- Keyboard Rows -->
+            <div id="row1" class="flex justify-center"></div>
+            <div id="row2" class="flex justify-center"></div>
+            <div id="row3" class="flex justify-center"></div>
+        </div>
+
+        <!-- TEMPLATE Keys -->
+        <template id="keyboard-key-template">
+            <button
+                class="key bg-stone-300 dark:bg-neutral-600 text-stone-600 dark:text-white w-7 h-7 sm:w-14 sm:h-14 m-1 rounded-sm sm:text-xl transform hover:scale-110 hover:bg-stone-400 dark:hover:bg-neutral-500 duration-150"></button>
+        </template>
+
+        <!-- CHANGE THEME -->
+        <button id="change-theme"
+            class="absolute top-5 right-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-150">
+            LIGHT
+        </button>
     </div>
-
-    <!-- TEMPLATE Keys -->
-    <template id="keyboard-key-template">
-        <button
-            class="key bg-neutral-600 text-white w-7 h-7 sm:w-14 sm:h-14 m-1 rounded-sm sm:text-xl transition-all transform hover:scale-110 hover:bg-neutral-500"></button>
-    </template>
 
     <script src="wordle.js"></script>
+    <script src="darkmode.js"></script>
 
 </body>
 
