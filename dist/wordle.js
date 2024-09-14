@@ -1,5 +1,29 @@
 // Parole da indovinare
-const words = ["STENO", "APPLE", "HOUSE", "PLANE", "TRAIN", "BRAVE", "CRANE", "SHINE", "GREAT", "SMART"];
+const words = [
+    "KAYAK",
+    "TOKYO",
+    "KENYA",
+    "WATER", "TEXAS", "KOALA", "EXTRA", "AEREO", "AEREI", "AEREE", "AEREA",
+    "ARATO", "ARATI", "ARATE", "ARATA", "ARARE", "AORTA", "ACETO", "ACETI", "ACERO", "ACARO",
+    "ALICI", "ALICE", "ALIAS", "ALATO", "ALATE", "ALARE", "AIUTO", "AIUTI", "AIUTA", "ACINO",
+    "ALTRO", "ALTRI", "ALTRE", "ALTRA", "ALONE", "ALANO", "ALANI", "ACUTO", "ACUTI", "ACUTA",
+    "ACIDE", "ACIDA", "ABITO", "ABITI", "ABITA", "ABETI", "ABETE", "ABATI", "ABATE", "ABACO",
+    "AFONI", "AFONE", "AFONA", "ADONE", "ADAMO", "ABILI", "ABILE",
+    "ARDUI", "ARDUE", "ARDUA", "AMBRA", "ALCUN", "ABUSO", "ABUSI", "ABUSA",
+    "AGATA", "ADDIO", "ABBIA", "ABBAI",
+    "BARDO", "BARDI", "BARBE", "BARBA", "ARCHI", "ALZAI", "AHIME", "AGLIO", "AGILI", "AGILE",
+    "BELVE", "BELVA", "BANDO", "BANDI", "BANDE", "BANDA", "BALDO", "ANCHE", "ALBUM",
+    "DAZIO", "BEIGE", "AGIVO", "AGIVI", "AGIVA", "AGAVE", "ADIGE", "ADAGI",
+    "BEFFE", "BEFFA", "BAZAR", "BAFFO", "BAFFI", "BACHI", "BABBO", "BABBI", "ACQUE", "ACQUA",
+    "BELGI", "BELGA", "BALZO", "BALZI", "BALZE", "BALZA", "BAGNO", "BAGNI", "BAGNA",
+    "BUFFO", "BUFFI", "BUFFE", "BUFFA", "BUCHI", "BUCHE", "BLITZ",
+    "GARZA", "GAFFE", "FUNGO", "FUNGE", "COZZO", "COZZI", "COZZE", "COZZA", "COZZO",
+    "LEGGE", "LEGGA", "LAGHI", "GOGNA", "GIGLI", "GHANA", "GANGE", "BLUFF", "ALGHE",
+    "ZUPPO", "ZUPPE", "ZUPPA", "RUGHE", "LIGHT",
+    "PAGHI", "PAGGI", "FAGGI", "DIGHE", "BOZZO", "BOZZE", "BOZZA",
+    "PUZZO", "PUZZI", "PUZZA", "FUGHE", "FUGGI", "FUGGE", "FUGGA",
+    "GOZZO", "GAZZA",
+];
 
 // Funzione per selezionare una parola casuale
 function getRandomWord() {
@@ -111,80 +135,91 @@ function isLetterKey(key) {
 
 // Controlla se la parola inserita è corretta
 function checkWord() {
-    if (currentCol === 5) {
-        let guess = '';
-        for (let i = 0; i < 5; i++) {
-            guess += grid.children[currentRow * 5 + i].textContent;
-        }
-
-        const verifiedLetters = Array(5).fill(false);
-
-        // Prima passata: verifica le lettere nella posizione corretta
-        for (let i = 0; i < 5; i++) {
-            const cell = grid.children[currentRow * 5 + i];
-            const letter = guess[i];
-
-            if (letter === word[i]) {
-                cell.classList.add('bg-green-500'); // Lettera nella posizione corretta
-                verifiedLetters[i] = true;
-            }
-        }
-
-        // Seconda passata: verifica le lettere presenti ma nella posizione sbagliata
-        for (let i = 0; i < 5; i++) {
-            const cell = grid.children[currentRow * 5 + i];
-            const letter = guess[i];
-
-            if (!verifiedLetters[i]) {
-                if (word.includes(letter)) {
-                    let countInWord = 0;
-                    let countInGuess = 0;
-
-                    // Conta quante volte la lettera appare nella parola
-                    for (let j = 0; j < 5; j++) {
-                        if (word[j] === letter) {
-                            countInWord++;
-                        }
-                    }
-
-                    // Conta quante volte la lettera appare nella guess fino alla posizione corrente
-                    for (let j = 0; j <= i; j++) {
-                        if (guess[j] === letter) {
-                            countInGuess++;
-                        }
-                    }
-
-                    // Se la lettera appare più volte nella guess rispetto alla parola, non cambiare il colore
-                    if (countInGuess <= countInWord) {
-                        cell.classList.add('bg-yellow-500'); // Lettera presente ma nella posizione sbagliata
-                    }
-                } else {
-                    cell.classList.add('bg-red-500'); // Lettera sbagliata
-                    disableLetter(letter); // Disabilita la lettera
-                }
-            }
-        }
-
-        if (guess === word) {
-            // Rimuovi l'animazione dalle celle dopo che la parola è stata controllata
-            animatedCells.forEach(cell => {
-                cell.classList.remove('animate-bounce');
-            });
-
-            // Svuota l'array delle celle animate
-            animatedCells = [];
-
-            // Aggiungi un ritardo di 500ms prima di mostrare l'avviso di vittoria
-            setTimeout(() => {
-                alert('Hai indovinato!');
-                resetGame(); // Resetta il gioco
-            }, 500);
-        } else {
-            alert('Riprova!');
-        }
-        currentRow++;
-        currentCol = 0;
+    if (currentCol !== 5) {
+        // Mostra un messaggio di avviso
+        alert('Completa la parola prima di premere invio!');
+        return;
     }
+
+    let guess = '';
+    for (let i = 0; i < 5; i++) {
+        guess += grid.children[currentRow * 5 + i].textContent;
+    }
+
+    // Controlla se la parola inserita è valida
+    if (!words.includes(guess)) {
+        alert('La parola non è valida!');
+        return;
+    }
+
+    const verifiedLetters = Array(5).fill(false);
+
+    // Prima passata: verifica le lettere nella posizione corretta
+    for (let i = 0; i < 5; i++) {
+        const cell = grid.children[currentRow * 5 + i];
+        const letter = guess[i];
+
+        if (letter === word[i]) {
+            cell.classList.add('bg-green-500'); // Lettera nella posizione corretta
+            verifiedLetters[i] = true;
+        }
+    }
+
+    // Seconda passata: verifica le lettere presenti ma nella posizione sbagliata
+    for (let i = 0; i < 5; i++) {
+        const cell = grid.children[currentRow * 5 + i];
+        const letter = guess[i];
+
+        if (!verifiedLetters[i]) {
+            if (word.includes(letter)) {
+                let countInWord = 0;
+                let countInGuess = 0;
+
+                // Conta quante volte la lettera appare nella parola
+                for (let j = 0; j < 5; j++) {
+                    if (word[j] === letter) {
+                        countInWord++;
+                    }
+                }
+
+                // Conta quante volte la lettera appare nella guess fino alla posizione corrente
+                for (let j = 0; j <= i; j++) {
+                    if (guess[j] === letter) {
+                        countInGuess++;
+                    }
+                }
+
+                // Se la lettera appare più volte nella guess rispetto alla parola, non cambiare il colore
+                if (countInGuess <= countInWord) {
+                    cell.classList.add('bg-yellow-500'); // Lettera presente ma nella posizione sbagliata
+                }
+            } else {
+                cell.classList.add('bg-red-500'); // Lettera sbagliata
+                disableLetter(letter); // Disabilita la lettera
+            }
+        }
+    }
+
+    if (guess === word) {
+        // Rimuovi l'animazione dalle celle dopo che la parola è stata controllata
+        animatedCells.forEach(cell => {
+            cell.classList.remove('animate-bounce');
+        });
+
+        // Svuota l'array delle celle animate
+        animatedCells = [];
+
+        // Aggiungi un ritardo di 500ms prima di mostrare l'avviso di vittoria
+        setTimeout(() => {
+            alert('Hai indovinato!');
+            resetGame(); // Resetta il gioco
+        }, 500);
+    } else {
+        alert('Riprova!');
+    }
+    currentRow++;
+    currentCol = 0;
+
     // Rimuovi l'animazione dalle celle dopo che la parola è stata controllata
     animatedCells.forEach(cell => {
         cell.classList.remove('animate-bounce');
