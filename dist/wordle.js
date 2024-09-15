@@ -1,38 +1,18 @@
-// Parole da indovinare
-const words = [
-    "KAYAK",
-    "TOKYO",
-    "KENYA",
-    "WATER", "TEXAS", "KOALA", "EXTRA", "AEREO", "AEREI", "AEREE", "AEREA",
-    "ARATO", "ARATI", "ARATE", "ARATA", "ARARE", "AORTA", "ACETO", "ACETI", "ACERO", "ACARO",
-    "ALICI", "ALICE", "ALIAS", "ALATO", "ALATE", "ALARE", "AIUTO", "AIUTI", "AIUTA", "ACINO",
-    "ALTRO", "ALTRI", "ALTRE", "ALTRA", "ALONE", "ALANO", "ALANI", "ACUTO", "ACUTI", "ACUTA",
-    "ACIDE", "ACIDA", "ABITO", "ABITI", "ABITA", "ABETI", "ABETE", "ABATI", "ABATE", "ABACO",
-    "AFONI", "AFONE", "AFONA", "ADONE", "ADAMO", "ABILI", "ABILE",
-    "ARDUI", "ARDUE", "ARDUA", "AMBRA", "ALCUN", "ABUSO", "ABUSI", "ABUSA",
-    "AGATA", "ADDIO", "ABBIA", "ABBAI",
-    "BARDO", "BARDI", "BARBE", "BARBA", "ARCHI", "ALZAI", "AHIME", "AGLIO", "AGILI", "AGILE",
-    "BELVE", "BELVA", "BANDO", "BANDI", "BANDE", "BANDA", "BALDO", "ANCHE", "ALBUM",
-    "DAZIO", "BEIGE", "AGIVO", "AGIVI", "AGIVA", "AGAVE", "ADIGE", "ADAGI",
-    "BEFFE", "BEFFA", "BAZAR", "BAFFO", "BAFFI", "BACHI", "BABBO", "BABBI", "ACQUE", "ACQUA",
-    "BELGI", "BELGA", "BALZO", "BALZI", "BALZE", "BALZA", "BAGNO", "BAGNI", "BAGNA",
-    "BUFFO", "BUFFI", "BUFFE", "BUFFA", "BUCHI", "BUCHE", "BLITZ",
-    "GARZA", "GAFFE", "FUNGO", "FUNGE", "COZZO", "COZZI", "COZZE", "COZZA", "COZZO",
-    "LEGGE", "LEGGA", "LAGHI", "GOGNA", "GIGLI", "GHANA", "GANGE", "BLUFF", "ALGHE",
-    "ZUPPO", "ZUPPE", "ZUPPA", "RUGHE", "LIGHT",
-    "PAGHI", "PAGGI", "FAGGI", "DIGHE", "BOZZO", "BOZZE", "BOZZA",
-    "PUZZO", "PUZZI", "PUZZA", "FUGHE", "FUGGI", "FUGGE", "FUGGA",
-    "GOZZO", "GAZZA",
-];
+import { initializeDictionary, isValidWord, secretWord, chooseRandomWord } from './dictionary.js';
 
-// Funzione per selezionare una parola casuale
-function getRandomWord() {
-    const randomIndex = Math.floor(Math.random() * words.length);
-    return words[randomIndex];
+let validWords = [];
+let word = '';
+
+async function initializeGame() {
+    await initializeDictionary(); // Assicurati che le parole siano caricate
+    word = secretWord; // Parola da indovinare
+
+    console.log('Words for the game:', validWords); // Debug
+    console.log('Secret Word in game.js:', word); // Debug
+
+    initializeGrid();
+    initializeKeyboard();
 }
-
-// Variabile per la parola da indovinare
-let word = getRandomWord(); // Parola da indovinare
 
 let currentRow = 0;
 let currentCol = 0;
@@ -146,12 +126,14 @@ function checkWord() {
         guess += grid.children[currentRow * 5 + i].textContent;
     }
 
-    // Controlla se la parola inserita è valida
-    if (!words.includes(guess)) {
+    guess = guess.toUpperCase(); // Assicurati che la parola inserita sia in maiuscolo
+
+    if (!isValidWord(guess)) {
         alert('La parola non è valida!');
         return;
     }
 
+    const wordCopy = word.split(''); // Copia la parola segreta in un array
     const verifiedLetters = Array(5).fill(false);
 
     // Prima passata: verifica le lettere nella posizione corretta
@@ -160,10 +142,13 @@ function checkWord() {
         const letter = guess[i];
 
         if (letter === word[i]) {
+            cell.classList.remove('bg-neutral-500'); // Rimuovi il colore grigio
             cell.classList.add('bg-green-500'); // Lettera nella posizione corretta
             verifiedLetters[i] = true;
+            wordCopy[i] = null; // Rimuovi la lettera dalla copia della parola
         }
     }
+
 
     // Seconda passata: verifica le lettere presenti ma nella posizione sbagliata
     for (let i = 0; i < 5; i++) {
@@ -171,28 +156,12 @@ function checkWord() {
         const letter = guess[i];
 
         if (!verifiedLetters[i]) {
-            if (word.includes(letter)) {
-                let countInWord = 0;
-                let countInGuess = 0;
+            const letterIndex = wordCopy.indexOf(letter);
 
-                // Conta quante volte la lettera appare nella parola
-                for (let j = 0; j < 5; j++) {
-                    if (word[j] === letter) {
-                        countInWord++;
-                    }
-                }
-
-                // Conta quante volte la lettera appare nella guess fino alla posizione corrente
-                for (let j = 0; j <= i; j++) {
-                    if (guess[j] === letter) {
-                        countInGuess++;
-                    }
-                }
-
-                // Se la lettera appare più volte nella guess rispetto alla parola, non cambiare il colore
-                if (countInGuess <= countInWord) {
-                    cell.classList.add('bg-yellow-500'); // Lettera presente ma nella posizione sbagliata
-                }
+            if (letterIndex !== -1) {
+                cell.classList.remove('bg-neutral-500'); // Rimuovi il colore grigio
+                cell.classList.add('bg-yellow-500'); // Lettera presente ma nella posizione sbagliata
+                wordCopy[letterIndex] = null; // Rimuovi la lettera dalla copia della parola
             } else {
                 cell.classList.add('bg-red-500'); // Lettera sbagliata
                 disableLetter(letter); // Disabilita la lettera
@@ -265,7 +234,7 @@ function resetGame() {
     currentRow = 0;
     currentCol = 0;
     disabledLetters = [];
-    word = getRandomWord(); // Scegli una nuova parola casuale
+    secretWord = chooseRandomWord(validWords).toUpperCase(); // Scegli una nuova parola segreta
 
     // Svuota la griglia
     while (grid.firstChild) {
@@ -286,6 +255,4 @@ function resetGame() {
     initializeKeyboard();
 }
 
-// Inizializza la griglia e la tastiera
-initializeGrid();
-initializeKeyboard();
+initializeGame();
