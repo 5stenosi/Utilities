@@ -130,7 +130,6 @@ function isLetterKey(key) {
     return keysRow1.includes(key) || keysRow2.includes(key) || keysRow3.includes(key);
 }
 
-
 // Controlla se la parola inserita è corretta
 function checkWord() {
     if (currentCol !== 5) {
@@ -159,9 +158,12 @@ function checkWord() {
         const cell = grid.children[currentRow * 5 + i];
         const letter = guess[i];
 
+        // Rimuovi i colori precedenti prima di aggiungere i nuovi colori
+        cell.classList.remove('bg-stone-400', 'bg-neutral-500', 'bg-green-500', 'bg-yellow-500', 'bg-red-500');
+
         if (letter === word[i]) {
-            cell.classList.remove('bg-neutral-500'); // Rimuovi il colore grigio
-            cell.classList.add('bg-green-500'); // Lettera nella posizione corretta
+            // Lettera nella posizione corretta
+            cell.classList.add('bg-green-500'); 
             verifiedLetters[i] = true;
             wordCopy[i] = null; // Rimuovi la lettera dalla copia della parola
         }
@@ -176,25 +178,18 @@ function checkWord() {
             const letterIndex = wordCopy.indexOf(letter);
 
             if (letterIndex !== -1) {
-                cell.classList.remove('bg-neutral-500'); // Rimuovi il colore grigio
-                cell.classList.add('bg-yellow-500'); // Lettera presente ma nella posizione sbagliata
+                // Lettera presente ma nella posizione sbagliata
+                cell.classList.add('bg-yellow-500'); 
                 wordCopy[letterIndex] = null; // Rimuovi la lettera dalla copia della parola
             } else {
-                cell.classList.add('bg-red-500'); // Lettera sbagliata
+                // Lettera sbagliata
+                cell.classList.add('bg-red-500');
                 disableLetter(letter); // Disabilita la lettera
             }
         }
     }
 
     if (guess === word) {
-        // Rimuovi l'animazione dalle celle dopo che la parola è stata controllata
-        animatedCells.forEach(cell => {
-            cell.classList.remove('animate-bounce');
-        });
-
-        // Svuota l'array delle celle animate
-        animatedCells = [];
-
         setTimeout(() => {
             alert('Hai indovinato!');
             resetGame(); // Resetta il gioco

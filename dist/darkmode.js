@@ -1,19 +1,19 @@
 // Funzione per aggiornare il colore delle celle basato sul tema corrente
-function updateCellColors() {
-    const isDarkMode = document.documentElement.classList.contains('dark');
-    const cells = document.querySelectorAll('.size-14'); // Seleziona tutte le celle con classe 'size-14'
-
+function updateCellColors(isDark) {
+    const cells = document.querySelectorAll('#grid .size-14');
     cells.forEach(cell => {
-        if (cell.textContent.trim() !== '') { // Se la cella ha del contenuto
-            // Rimuovi i colori precedenti
-            cell.classList.remove('bg-neutral-500', 'bg-stone-400');
-
-            // Aggiungi il colore giusto basato sul tema corrente
-            if (isDarkMode) {
-                cell.classList.add('bg-neutral-500'); // Colore per dark mode
-            } else {
-                cell.classList.add('bg-stone-400'); // Colore per light mode
-            }
+        // Mantieni il colore delle celle in base al loro stato
+        if (cell.classList.contains('bg-green-500')) {
+            cell.classList.remove('bg-stone-400', 'bg-neutral-500');
+            cell.classList.add('bg-green-500');
+        }
+        if (cell.classList.contains('bg-yellow-500')) {
+            cell.classList.remove('bg-stone-400', 'bg-neutral-500');
+            cell.classList.add('bg-yellow-500');
+        }
+        if (cell.classList.contains('bg-red-500')) {
+            cell.classList.remove('bg-stone-400', 'bg-neutral-500');
+            cell.classList.add('bg-red-500');
         }
     });
 }
@@ -25,8 +25,8 @@ function toggleTheme() {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     document.getElementById('change-theme').textContent = isDark ? 'DARK' : 'LIGHT';
 
-    // Aggiorna i colori delle celle dopo il cambio tema
-    updateCellColors();
+    // Aggiorna il colore delle celle in base al tema
+    updateCellColors(isDark);
 }
 
 // Event listener per il bottone di cambio tema
@@ -36,17 +36,18 @@ document.getElementById('change-theme').addEventListener('click', toggleTheme);
 (function () {
     let theme = localStorage.getItem('theme');
     if (!theme) {
-        // Controlla la preferenza del sistema se non è salvato un tema nel localStorage
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
         theme = prefersDarkScheme ? 'dark' : 'light';
     }
 
-    // Imposta la classe 'dark' su <html> prima del caricamento della pagina
     if (theme === 'dark') {
         document.documentElement.classList.add('dark');
     } else {
         document.documentElement.classList.remove('dark');
     }
+
+    // Aggiorna i colori delle celle in base al tema salvato
+    updateCellColors(theme === 'dark');
 })();
 
 // Aggiorna il testo del bottone e i colori delle celle quando la pagina è completamente caricata
