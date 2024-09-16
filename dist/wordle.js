@@ -1,11 +1,11 @@
-import { initializeDictionary, isValidWord, secretWord, chooseRandomWord } from './dictionary.js';
+import { initializeDictionary, isValidWord, chooseRandomWord, getSecretWord } from './dictionary.js';
 
 let validWords = [];
 let word = '';
 
 async function initializeGame() {
     await initializeDictionary(); // Assicurati che le parole siano caricate
-    word = secretWord; // Parola da indovinare
+    word = getSecretWord(); // Parola da indovinare
 
     console.log('Words for the game:', validWords); // Debug
     console.log('Secret Word in game.js:', word); // Debug
@@ -178,7 +178,6 @@ function checkWord() {
         // Svuota l'array delle celle animate
         animatedCells = [];
 
-        // Aggiungi un ritardo di 500ms prima di mostrare l'avviso di vittoria
         setTimeout(() => {
             alert('Hai indovinato!');
             resetGame(); // Resetta il gioco
@@ -234,13 +233,13 @@ function resetGame() {
     currentRow = 0;
     currentCol = 0;
     disabledLetters = [];
-    secretWord = chooseRandomWord(validWords).toUpperCase(); // Scegli una nuova parola segreta
+    word = chooseRandomWord(validWords).toUpperCase(); // Scegli una nuova parola segreta
+    console.log('New Secret Word:', word); // Debug
 
     // Svuota la griglia
     while (grid.firstChild) {
         grid.removeChild(grid.firstChild);
     }
-    initializeGrid();
 
     // Svuota la tastiera
     while (row1.firstChild) {
@@ -252,7 +251,8 @@ function resetGame() {
     while (row3.firstChild) {
         row3.removeChild(row3.firstChild);
     }
-    initializeKeyboard();
+
+    initializeGame();
 }
 
 initializeGame();

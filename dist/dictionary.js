@@ -45,7 +45,10 @@ async function initializeDictionary() {
     console.log('Secret Word:', secretWord); // Debug
 }
 
-
+// Aggiungi una funzione getter per secretWord
+function getSecretWord() {
+    return secretWord;
+}
 
 function isValidWord(word) {
     return validWords.includes(word.toUpperCase());
@@ -53,4 +56,4 @@ function isValidWord(word) {
 
 
 
-export { initializeDictionary, isValidWord, secretWord, chooseRandomWord };
+export { initializeDictionary, isValidWord, chooseRandomWord, getSecretWord };
