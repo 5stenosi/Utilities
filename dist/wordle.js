@@ -3,6 +3,8 @@ import { initializeDictionary, isValidWord, chooseRandomWord, getSecretWord } fr
 let validWords = [];
 let word = '';
 
+const MAX_ATTEMPTS = 6; // Numero massimo di tentativi
+
 async function initializeGame() {
     await initializeDictionary(); // Assicurati che le parole siano caricate
     word = getSecretWord(); // Parola da indovinare
@@ -76,8 +78,20 @@ function handleKeyPress(key) {
     if (currentCol < 5) {
         const cell = grid.children[currentRow * 5 + currentCol];
         cell.textContent = key;
-        // Cambia lo sfondo quando viene inserita una lettera
-        cell.classList.add('bg-neutral-500', 'animate-bounce');
+
+        // Controlla se il tema corrente è dark o light
+        const isDarkMode = document.documentElement.classList.contains('dark');
+
+        // Aggiungi la classe del colore in base al tema
+        if (isDarkMode) {
+            cell.classList.remove('bg-stone-400');
+            cell.classList.add('bg-neutral-500'); // Colore per dark mode
+        } else {
+            cell.classList.remove('bg-neutral-500');
+            cell.classList.add('bg-stone-400'); // Colore per light mode
+        }
+
+        cell.classList.add('animate-bounce'); // Animazione aggiunta
 
         // Aggiungi la cella all'array delle celle animate
         animatedCells.push(cell);
@@ -95,13 +109,16 @@ function handleSpecialKeyPress(key) {
     }
 }
 
-// Gestisce la pressione dei tasti della tastiera fisica
+// Gestisci la pressione dei tasti della tastiera fisica
 document.addEventListener('keydown', (e) => {
     const key = e.key.toUpperCase();
-    if (isLetterKey(key)) {
+    if (key === 'ENTER') {
+        e.preventDefault(); // Previene il comportamento predefinito del tasto "Enter"
+        handleSpecialKeyPress('ENTER');
+    } else if (isLetterKey(key)) {
         handleKeyPress(key);
-    } else {
-        handleSpecialKeyPress(key);
+    } else if (key === 'BACKSPACE') {
+        handleSpecialKeyPress('BACKSPACE');
     }
 });
 
@@ -112,6 +129,7 @@ function isLetterKey(key) {
     const keysRow3 = 'ZXCVBNM'.split('');
     return keysRow1.includes(key) || keysRow2.includes(key) || keysRow3.includes(key);
 }
+
 
 // Controlla se la parola inserita è corretta
 function checkWord() {
@@ -149,7 +167,6 @@ function checkWord() {
         }
     }
 
-
     // Seconda passata: verifica le lettere presenti ma nella posizione sbagliata
     for (let i = 0; i < 5; i++) {
         const cell = grid.children[currentRow * 5 + i];
@@ -183,7 +200,14 @@ function checkWord() {
             resetGame(); // Resetta il gioco
         }, 500);
     } else {
-        alert('Riprova!');
+        if (currentRow === MAX_ATTEMPTS - 1) {
+            setTimeout(() => {
+                alert('Hai perso! La parola era: ' + word);
+                resetGame(); // Resetta il gioco
+            }, 500);
+        } else {
+            alert('Riprova!');
+        }
     }
     currentRow++;
     currentCol = 0;
@@ -219,6 +243,7 @@ function deleteLetter() {
         cell.textContent = '';
         // Ripristina lo sfondo predefinito quando la cella è vuota
         cell.classList.remove('bg-neutral-500', 'animate-bounce');
+        cell.classList.remove('bg-stone-400', 'animate-bounce');
 
         // Rimuovi la cella dall'array delle celle animate
         const index = animatedCells.indexOf(cell);
