@@ -27,13 +27,16 @@ function toggleTheme() {
 
     // Aggiorna il colore delle celle in base al tema
     updateCellColors(isDark);
+
+    // Cambia il numero nella src dell'immagine da 1 a 2
+    const pageLogo = document.querySelector('#page-logo');
+    if (!isDark) {
+        pageLogo.href = pageLogo.href.replace('1.svg', '2.svg');
+    } else pageLogo.href = pageLogo.href.replace('2.svg', '1.svg');
 }
 
-// Event listener per il bottone di cambio tema
-document.getElementById('change-theme').addEventListener('click', toggleTheme);
-
-// Applica il tema salvato prima che la pagina venga renderizzata
-(function () {
+// Funzione per applicare il tema salvato
+function applySavedTheme() {
     let theme = localStorage.getItem('theme');
     if (!theme) {
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -48,13 +51,40 @@ document.getElementById('change-theme').addEventListener('click', toggleTheme);
 
     // Aggiorna i colori delle celle in base al tema salvato
     updateCellColors(theme === 'dark');
-})();
 
-// Aggiorna il testo del bottone e i colori delle celle quando la pagina è completamente caricata
-window.addEventListener('load', function () {
+    // Aggiorna il logo in base al tema salvato
+    const pageLogo = document.querySelector('#page-logo');
+    if (theme === 'dark') {
+        pageLogo.href = pageLogo.href.replace('2.svg', '1.svg');
+    } else {
+        pageLogo.href = pageLogo.href.replace('1.svg', '2.svg');
+    }
+}
+
+// Funzione per inizializzare il tema all'avvio della pagina
+function initializeTheme() {
     const isDark = document.documentElement.classList.contains('dark');
     document.getElementById('change-theme').textContent = isDark ? 'DARK' : 'LIGHT';
 
     // Aggiorna i colori delle celle all'avvio della pagina
-    updateCellColors();
-});
+    updateCellColors(isDark);
+
+    // Aggiorna il logo all'avvio della pagina
+    const pageLogo = document.querySelector('#page-logo');
+    if (isDark) {
+        pageLogo.href = pageLogo.href.replace('2.svg', '1.svg');
+    } else {
+        pageLogo.href = pageLogo.href.replace('1.svg', '2.svg');
+    }
+}
+
+// Event listener per il bottone di cambio tema
+document.getElementById('change-theme').addEventListener('click', toggleTheme);
+
+// Applica il tema salvato prima che la pagina venga renderizzata
+(function () {
+    applySavedTheme();
+})();
+
+// Aggiorna il testo del bottone e i colori delle celle quando la pagina è completamente caricata
+window.addEventListener('load', initializeTheme);

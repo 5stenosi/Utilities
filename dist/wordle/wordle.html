@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/dist/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
+    <link id="page-logo" rel="icon" href="/dist/assets/Wordle 1.svg">
     <title>Wordle - Stenosi</title>
 
 </head>
@@ -45,13 +46,13 @@
         <!-- CHANGE THEME -->
         <button id="change-theme"
             class="absolute top-5 right-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-150">
-            LIGHT
+            DARK
         </button>
     </div>
 
     <script type="module" src="wordle.js" defer></script>
     <script type="module" src="dictionary.js"></script>
-    <script type="module" src="darkmode.js"></script>
+    <script type="module" src="/dist/darkmode.js"></script>
 
 </body>
 

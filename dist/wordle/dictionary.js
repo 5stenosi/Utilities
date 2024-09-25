@@ -1,6 +1,7 @@
 let validWords = [];
 let secretWord = '';
 
+// Funzione per fetchare le parole dall'API
 async function fetchWords() {
     try {
         const response = await fetch('https://word-generator2.p.rapidapi.com/?length=5&count=9000', {
@@ -27,7 +28,8 @@ async function fetchWords() {
     }
 }
 
-function chooseRandomWord(words) {
+// Funzione per scegliere una parola casuale dall'array di parole
+export function chooseRandomWord(words) {
     if (words.length === 0) {
         console.error('No words available');
         return '';
@@ -36,7 +38,8 @@ function chooseRandomWord(words) {
     return words[randomIndex];
 }
 
-async function initializeDictionary() {
+// Funzione per inizializzare il dizionario
+export async function initializeDictionary() {
     validWords = await fetchWords();
     validWords = validWords.map(word => word.toUpperCase()); // Trasforma tutte le parole in maiuscolo
     validWords.sort(); // Ordina l'array in ordine alfabetico
@@ -45,15 +48,12 @@ async function initializeDictionary() {
     console.log('Secret Word:', secretWord); // Debug
 }
 
-// Aggiungi una funzione getter per secretWord
-function getSecretWord() {
+// Funzione getter per ottenere la parola segreta
+export function getSecretWord() {
     return secretWord;
 }
 
-function isValidWord(word) {
+// Funzione per verificare se una parola è valida
+export function isValidWord(word) {
     return validWords.includes(word.toUpperCase());
 }
-
-
-
-export { initializeDictionary, isValidWord, chooseRandomWord, getSecretWord };

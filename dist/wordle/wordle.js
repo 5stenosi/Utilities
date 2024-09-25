@@ -5,17 +5,6 @@ let word = '';
 
 const MAX_ATTEMPTS = 6; // Numero massimo di tentativi
 
-async function initializeGame() {
-    await initializeDictionary(); // Assicurati che le parole siano caricate
-    word = getSecretWord(); // Parola da indovinare
-
-    console.log('Words for the game:', validWords); // Debug
-    console.log('Secret Word in game.js:', word); // Debug
-
-    initializeGrid();
-    initializeKeyboard();
-}
-
 let currentRow = 0;
 let currentCol = 0;
 let disabledLetters = [];
@@ -27,6 +16,18 @@ const keyTemplate = document.getElementById('keyboard-key-template');
 const row1 = document.getElementById('row1');
 const row2 = document.getElementById('row2');
 const row3 = document.getElementById('row3');
+
+async function initializeGame() {
+    await initializeDictionary(); // Assicurati che le parole siano caricate
+    word = getSecretWord(); // Parola da indovinare
+
+    console.log('Words for the game:', validWords); // Debug
+    console.log('Secret Word is:', word); // Debug
+
+    initializeGrid();
+    initializeKeyboard();
+    addKeyboardEventListeners();
+}
 
 // Funzione per inizializzare la griglia
 function initializeGrid() {
@@ -110,17 +111,19 @@ function handleSpecialKeyPress(key) {
 }
 
 // Gestisci la pressione dei tasti della tastiera fisica
-document.addEventListener('keydown', (e) => {
-    const key = e.key.toUpperCase();
-    if (key === 'ENTER') {
-        e.preventDefault(); // Previene il comportamento predefinito del tasto "Enter"
-        handleSpecialKeyPress('ENTER');
-    } else if (isLetterKey(key)) {
-        handleKeyPress(key);
-    } else if (key === 'BACKSPACE') {
-        handleSpecialKeyPress('BACKSPACE');
-    }
-});
+function addKeyboardEventListeners() {
+    document.addEventListener('keydown', (e) => {
+        const key = e.key.toUpperCase();
+        if (key === 'ENTER') {
+            e.preventDefault(); // Previene il comportamento predefinito del tasto "Enter"
+            handleSpecialKeyPress('ENTER');
+        } else if (isLetterKey(key)) {
+            handleKeyPress(key);
+        } else if (key === 'BACKSPACE') {
+            handleSpecialKeyPress('BACKSPACE');
+        }
+    });
+}
 
 // Verifica se il tasto premuto è una lettera
 function isLetterKey(key) {
@@ -163,7 +166,7 @@ function checkWord() {
 
         if (letter === word[i]) {
             // Lettera nella posizione corretta
-            cell.classList.add('bg-green-500'); 
+            cell.classList.add('bg-green-500');
             verifiedLetters[i] = true;
             wordCopy[i] = null; // Rimuovi la lettera dalla copia della parola
         }
@@ -179,7 +182,7 @@ function checkWord() {
 
             if (letterIndex !== -1) {
                 // Lettera presente ma nella posizione sbagliata
-                cell.classList.add('bg-yellow-500'); 
+                cell.classList.add('bg-yellow-500');
                 wordCopy[letterIndex] = null; // Rimuovi la lettera dalla copia della parola
             } else {
                 // Lettera sbagliata

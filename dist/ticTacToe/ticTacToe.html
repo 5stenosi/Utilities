@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link id="page-logo" rel="icon" href="/dist/assets/TicTacToe 1.svg">
+    <title>Tic Tac Toe - Stenosi</title>
+
+</head>
+
+<body>
+
+    <div id="wrapper"
+        class="bg-stone-200 dark:bg-neutral-900 flex justify-center items-center h-screen flex-col duration-1000">
+        <!-- GRID -->
+        <div class="relative w-96 h-96 *:duration-1000 *:rounded-full">
+            <!-- Vertical Lines -->
+            <div class="absolute top-0 bottom-0 left-1/3 w-0.5 bg-stone-600 dark:bg-neutral-700"></div>
+            <div class="absolute top-0 bottom-0 left-2/3 w-0.5 bg-stone-600 dark:bg-neutral-700"></div>
+            <!-- Horizontal Lines -->
+            <div class="absolute left-0 right-0 top-1/3 h-0.5 bg-stone-600 dark:bg-neutral-700"></div>
+            <div class="absolute left-0 right-0 top-2/3 h-0.5 bg-stone-600 dark:bg-neutral-700"></div>
+        </div>
+        <!-- BUTTONS -->
+        <button
+            class="mt-10 border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+            RESET
+        </button>
+
+
+        <!-- CHANGE THEME -->
+        <button id="change-theme"
+            class="absolute top-5 right-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+            DARK
+        </button>
+    </div>
+
+    <script type="module" src="ticTacToe.js"></script>
+    <script type="module" src="/dist/darkmode.js"></script>
+
+</body>
+
+</html>
