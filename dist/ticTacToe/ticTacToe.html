@@ -13,10 +13,20 @@
 
 </head>
 
-<body>
+<body class="relative">
 
     <div id="wrapper"
         class="bg-stone-200 dark:bg-neutral-900 flex justify-center items-center h-screen flex-col duration-1000">
+        <!-- BACK -->
+        <a href="/dist/index.html">
+            <button id="back"
+                class="absolute *:hover:-translate-x-2 top-5 left-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+                <i
+                    class="fa-solid fa-arrow-left text-stone-600 dark:text-white text-xl translate-x-1 -translate-y-1 duration-1000"></i>
+                BACK
+            </button>
+        </a>
+
         <!-- GRID -->
         <div class="relative w-96 h-96 *:duration-1000 *:rounded-full">
             <!-- Vertical Lines -->
@@ -26,18 +36,33 @@
             <div class="absolute left-0 right-0 top-1/3 h-0.5 bg-stone-600 dark:bg-neutral-700"></div>
             <div class="absolute left-0 right-0 top-2/3 h-0.5 bg-stone-600 dark:bg-neutral-700"></div>
         </div>
-        <!-- BUTTONS -->
-        <button
-            class="mt-10 border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
-            RESET
-        </button>
 
+        <!-- BUTTONS -->
+        <div class="mt-10 space-x-1">
+            <!-- PLAYER1 -->
+            <input type="text" id="player1" name="player1" value="Player 1"
+                class="w-40 border px-3 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white bg-stone-200 dark:bg-neutral-900 outline-none duration-1000">
+            <!-- RESET -->
+            <button
+                class="border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+                RESET
+            </button>
+            <!-- PLAYER2 -->
+            <input type="text" id="player2" name="player2" value="Player 2"
+                class="w-40 border px-3 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white bg-stone-200 dark:bg-neutral-900 outline-none duration-1000">
+        </div>
 
         <!-- CHANGE THEME -->
         <button id="change-theme"
             class="absolute top-5 right-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
             DARK
         </button>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip"
+        class="absolute bg-stone-400 dark:bg-neutral-500 text-stone-600 dark:text-white font-medium dark:font-normal px-2 py-1 rounded transition-colors transition-opacity duration-1000">
+        
     </div>
 
     <script type="module" src="ticTacToe.js"></script>
