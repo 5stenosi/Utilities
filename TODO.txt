@@ -1,2 +1,1 @@
 Rendere uniforme la durata delle animazioni (1000ms)
-[25/09/2024 16:42] Wordle sembra essere tornato a funzionare, grazie a Dio

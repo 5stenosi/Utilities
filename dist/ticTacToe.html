@@ -28,13 +28,17 @@
         </a>
 
         <!-- GRID -->
-        <div class="relative w-96 h-96 *:duration-1000 *:rounded-full">
-            <!-- Vertical Lines -->
-            <div class="absolute top-0 bottom-0 left-1/3 w-0.5 bg-stone-600 dark:bg-neutral-700"></div>
-            <div class="absolute top-0 bottom-0 left-2/3 w-0.5 bg-stone-600 dark:bg-neutral-700"></div>
-            <!-- Horizontal Lines -->
-            <div class="absolute left-0 right-0 top-1/3 h-0.5 bg-stone-600 dark:bg-neutral-700"></div>
-            <div class="absolute left-0 right-0 top-2/3 h-0.5 bg-stone-600 dark:bg-neutral-700"></div>
+        <div class="relative w-96 h-96 *:duration-1000 grid grid-cols-3 grid-rows-3 *:flex *:justify-center *:items-center *:border">
+            <!-- Cells -->
+            <button class="border-t-0 border-l-0 border-stone-600 dark:border-neutral-700"></button>
+            <button class="border-t-0 border-stone-600 dark:border-neutral-700"></button>
+            <button class="border-t-0 border-r-0 border-stone-600 dark:border-neutral-700"></button>
+            <button class="border-l-0 border-stone-600 dark:border-neutral-700"></button>
+            <button class="border-stone-600 dark:border-neutral-700"></button>
+            <button class="border-r-0 border-stone-600 dark:border-neutral-700"></button>
+            <button class="border-b-0 border-l-0 border-stone-600 dark:border-neutral-700"></button>
+            <button class="border-b-0 border-stone-600 dark:border-neutral-700"></button>
+            <button class="border-b-0 border-r-0 border-stone-600 dark:border-neutral-700"></button>
         </div>
 
         <!-- BUTTONS -->
@@ -61,11 +65,11 @@
 
     <!-- Tooltip -->
     <div id="tooltip"
-        class="absolute cursor-default bg-stone-400 dark:bg-neutral-500 text-stone-600 dark:text-white font-medium dark:font-normal px-2 py-1 rounded transition-colors transition-opacity duration-1000">
-
+        class="absolute cursor-default pointer-events-none bg-stone-400 dark:bg-neutral-500 text-stone-600 dark:text-white font-medium dark:font-normal px-2 py-1 rounded transition-colors transition-opacity duration-1000">
     </div>
 
     <script type="module" src="ticTacToe.js"></script>
+    <script type="module" src="tooltip.js"></script>
     <script type="module" src="darkmode.js"></script>
 
 </body>
