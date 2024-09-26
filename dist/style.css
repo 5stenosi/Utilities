@@ -874,16 +874,6 @@ video {
   transition-duration: 1000ms;
 }
 
-.placeholder\:text-stone-600::-moz-placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(87 83 78 / var(--tw-text-opacity));
-}
-
-.placeholder\:text-stone-600::placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(87 83 78 / var(--tw-text-opacity));
-}
-
 .hover\:scale-110:hover {
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
@@ -932,36 +922,6 @@ video {
 .dark\:text-white:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.dark\:placeholder\:bg-neutral-700:is(.dark *)::-moz-placeholder {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 64 64 / var(--tw-bg-opacity));
-}
-
-.dark\:placeholder\:bg-neutral-700:is(.dark *)::placeholder {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 64 64 / var(--tw-bg-opacity));
-}
-
-.dark\:placeholder\:text-white:is(.dark *)::-moz-placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.dark\:placeholder\:text-white:is(.dark *)::placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.dark\:placeholder\:text-neutral-700:is(.dark *)::-moz-placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(64 64 64 / var(--tw-text-opacity));
-}
-
-.dark\:placeholder\:text-neutral-700:is(.dark *)::placeholder {
-  --tw-text-opacity: 1;
-  color: rgb(64 64 64 / var(--tw-text-opacity));
 }
 
 .dark\:hover\:bg-neutral-500:hover:is(.dark *) {
