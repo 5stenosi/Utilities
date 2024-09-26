@@ -1,5 +1,10 @@
 let tooltipTimeout;
 let chosenPlayer;
+let tooltipX = 0;
+let tooltipY = 0;
+let targetX = 0;
+let targetY = 0;
+let tooltipInitialized = false;
 
 document.addEventListener('DOMContentLoaded', function () {
     loadPlayerValues();
@@ -8,16 +13,40 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('mousemove', function (e) {
+    if (!tooltipInitialized) {
+        initializeTooltip(e);
+        tooltipInitialized = true;
+    }
+
+    targetX = e.pageX + 10;
+    targetY = e.pageY - 40;
+
     const tooltip = document.getElementById('tooltip');
-    tooltip.style.left = e.pageX + 10 + 'px';
-    tooltip.style.top = e.pageY - 40 + 'px';
-    tooltip.style.opacity = '1';
+    tooltip.style.opacity = '1'; // Reset opacity to 1 when mouse moves
 
     clearTimeout(tooltipTimeout);
     tooltipTimeout = setTimeout(function () {
         tooltip.style.opacity = '0.5';
     }, 300);
 });
+
+function initializeTooltip(e) {
+    const tooltip = document.getElementById('tooltip');
+    tooltipX = e.pageX + 10;
+    tooltipY = e.pageY - 40;
+    tooltip.style.left = tooltipX + 'px';
+    tooltip.style.top = tooltipY + 'px';
+    animateTooltip();
+}
+
+function animateTooltip() {
+    const tooltip = document.getElementById('tooltip');
+    tooltipX += (targetX - tooltipX) * 0.1;
+    tooltipY += (targetY - tooltipY) * 0.1;
+    tooltip.style.left = tooltipX + 'px';
+    tooltip.style.top = tooltipY + 'px';
+    requestAnimationFrame(animateTooltip);
+}
 
 function choosePlayer() {
     chosenPlayer = Math.random() < 0.5 ? 'player1' : 'player2';
