@@ -1,1 +1,1 @@
-Rendere uniforme la durata delle animazioni (1000ms)
+Controllare come mai la lettera A in Wordle non funziona bene
