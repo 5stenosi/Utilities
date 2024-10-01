@@ -41,7 +41,7 @@ function initializeGrid() {
 function initializeKeyboard() {
     const keysRow1 = 'QWERTYUIOP'.split('');
     const keysRow2 = 'ASDFGHJKL'.split('');
-    const keysRow3 = ['ENTER', ...'ZXCVBNM'.split(''), 'BACKSPACE'];
+    const keysRow3 = [, ...'ZXCVBNM'.split(''), 'BACKSPACE'];
 
     keysRow1.forEach(key => createKey(key, row1));
     keysRow2.forEach(key => createKey(key, row2));
@@ -221,7 +221,7 @@ function checkWord() {
 
 // Funzione per disabilitare una lettera
 function disableLetter(letter) {
-    if (!disabledLetters.includes(letter)) {
+    if (!disabledLetters.includes(letter) && !word.includes(letter)) {
         disabledLetters.push(letter);
         const keyElements = document.querySelectorAll('.key');
         keyElements.forEach(keyElement => {
@@ -232,6 +232,7 @@ function disableLetter(letter) {
         });
     }
 }
+
 
 // Funzione per cancellare una lettera
 function deleteLetter() {
