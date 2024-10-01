@@ -41,7 +41,7 @@ function initializeGrid() {
 function initializeKeyboard() {
     const keysRow1 = 'QWERTYUIOP'.split('');
     const keysRow2 = 'ASDFGHJKL'.split('');
-    const keysRow3 = [, ...'ZXCVBNM'.split(''), 'BACKSPACE'];
+    const keysRow3 = [...'ZXCVBNM'.split(''), 'BACKSPACE', 'ENTER'];
 
     keysRow1.forEach(key => createKey(key, row1));
     keysRow2.forEach(key => createKey(key, row2));

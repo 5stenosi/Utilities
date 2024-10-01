@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <link id="page-logo" rel="icon" href="assets/Calculator 1.svg">
-    <title>Tic Tac Toe - Stenosi</title>
+    <title>Calculator - Stenosi</title>
 
 </head>
 
@@ -27,34 +27,107 @@
             </button>
         </a>
 
-        <!-- GRID -->
-        <div
-            class="relative w-96 h-96 *:duration-1000 grid grid-cols-3 grid-rows-3 *:flex *:justify-center *:items-center *:border">
-            <!-- Cells -->
-            <button class="border-t-0 border-l-0 border-stone-600 dark:border-neutral-700"></button>
-            <button class="border-t-0 border-stone-600 dark:border-neutral-700"></button>
-            <button class="border-t-0 border-r-0 border-stone-600 dark:border-neutral-700"></button>
-            <button class="border-l-0 border-stone-600 dark:border-neutral-700"></button>
-            <button class="border-stone-600 dark:border-neutral-700"></button>
-            <button class="border-r-0 border-stone-600 dark:border-neutral-700"></button>
-            <button class="border-b-0 border-l-0 border-stone-600 dark:border-neutral-700"></button>
-            <button class="border-b-0 border-stone-600 dark:border-neutral-700"></button>
-            <button class="border-b-0 border-r-0 border-stone-600 dark:border-neutral-700"></button>
-        </div>
-
-        <!-- BUTTONS -->
-        <div class="mt-10 space-x-1">
-            <!-- PLAYER1 -->
-            <input type="text" id="player1" name="player1" value="Player 1"
-                class="w-40 border px-3 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white bg-stone-200 dark:bg-neutral-900 outline-none duration-1000">
-            <!-- RESET -->
+        <!-- CALCULATOR -->
+        <div class="relative grid grid-cols-4 grid-rows-6 gap-3">
+            <!-- CALCULATION -->
+            <div class="col-span-full"></div>
+            <!-- RESULT -->
+            <div class="col-span-full"></div>
+            <!-- DELETE ALL -->
             <button
-                class="border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
-                RESET
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-c duration-150"></i>
             </button>
-            <!-- PLAYER2 -->
-            <input type="text" id="player2" name="player2" value="Player 2"
-                class="w-40 border px-3 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white bg-stone-200 dark:bg-neutral-900 outline-none duration-1000">
+            <!-- PERCENTAGE -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-percent duration-150"></i>
+            </button>
+            <!-- DELETE -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-backspace duration-150"></i>
+            </button>
+            <!-- DIVIDE -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-divide duration-150"></i>
+            </button>
+            <!-- 7 -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-7 duration-150"></i>
+            </button>
+            <!-- 8 -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-8 duration-150"></i>
+            </button>
+            <!-- 9 -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-9 duration-150"></i>
+            </button>
+            <!-- MULTIPLY -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-multiply duration-150"></i>
+            </button>
+            <!-- 4 -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-4 duration-150"></i>
+            </button>
+            <!-- 5 -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-5 duration-150"></i>
+            </button>
+            <!-- 6 -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-6 duration-150"></i>
+            </button>
+            <!-- MINUS -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-minus duration-150"></i>
+            </button>
+            <!-- 1 -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-1 duration-150"></i>
+            </button>
+            <!-- 2 -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-2 duration-150"></i>
+            </button>
+            <!-- 3 -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-3 duration-150"></i>
+            </button>
+            <!-- PLUS -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-plus duration-150"></i>
+            </button>
+            <!-- 0 -->
+            <button
+                class="col-span-2 h-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-0 duration-150"></i>
+            </button>
+            <!-- DECIMAL -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-xs rounded-lg duration-150">
+                <i class="fa-solid fa-circle duration-150"></i>
+            </button>
+            <!-- EQUALS -->
+            <button
+                class="size-20 border border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 text-3xl rounded-lg duration-150">
+                <i class="fa-solid fa-equals duration-150"></i>
+            </button>
         </div>
 
         <!-- CHANGE THEME -->
@@ -64,13 +137,7 @@
         </button>
     </div>
 
-    <!-- Tooltip -->
-    <div id="tooltip"
-        class="absolute cursor-default pointer-events-none bg-stone-400 dark:bg-neutral-500 text-stone-600 dark:text-white font-medium dark:font-normal px-2 py-1 rounded transition duration-1000">
-    </div>
-
-    <script type="module" src="ticTacToe.js"></script>
-    <script type="module" src="tooltip.js"></script>
+    <script type="module" src="calculator.js"></script>
     <script type="module" src="darkmode.js"></script>
 
 </body>
