@@ -8,8 +8,20 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function savePlayerValues() {
-    const player1Value = document.getElementById('player1').value;
-    const player2Value = document.getElementById('player2').value;
+    let player1Value = document.getElementById('player1').value;
+    let player2Value = document.getElementById('player2').value;
+
+    if (player1Value.length > 15) {
+        player1Value = player1Value.substring(0, 15);
+    }
+
+    if (player2Value.length > 15) {
+        player2Value = player2Value.substring(0, 15);
+    }
+
+    document.getElementById('player1').value = player1Value;
+    document.getElementById('player2').value = player2Value;
+
     localStorage.setItem('player1', player1Value);
     localStorage.setItem('player2', player2Value);
     updateTooltip(`${getCurrentPlayerName()}`);
@@ -111,4 +123,8 @@ function initializeGame() {
 
     // Set the initial tooltip with player names and icons
     updateTooltip(`${getCurrentPlayerName()}`);
+
+    // Add event listeners to update tooltip in real-time when player names change
+    player1Input.addEventListener('input', () => updateTooltip(`${getCurrentPlayerName()}`));
+    player2Input.addEventListener('input', () => updateTooltip(`${getCurrentPlayerName()}`));
 }
