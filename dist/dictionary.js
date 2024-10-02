@@ -31,7 +31,6 @@ async function fetchWords() {
 // Funzione per scegliere una parola casuale dall'array di parole
 export function chooseRandomWord(words) {
     if (words.length === 0) {
-        console.error('No words available');
         return '';
     }
     const randomIndex = Math.floor(Math.random() * words.length);
@@ -56,4 +55,47 @@ export function getSecretWord() {
 // Funzione per verificare se una parola è valida
 export function isValidWord(word) {
     return validWords.includes(word.toUpperCase());
+}
+
+// DEFINITION // DEFINITION // DEFINITION // DEFINITION // DEFINITION // DEFINITION // DEFINITION 
+
+// Funzione per ottenere la definizione di una parola
+export async function fetchWordDefinition(word) {
+    const url = `https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary?word=${word}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': 'ab1d528845mshada179191771720p1b4f2ejsn014e86606331',
+            'x-rapidapi-host': 'dictionary-by-api-ninjas.p.rapidapi.com'
+        }
+    };
+
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json(); // Assicurati che il risultato sia un oggetto JSON
+
+        if (result.definition) {
+            // Cerca il numero "2." nella definizione e taglia il testo prima di esso
+            const definition = result.definition;
+            const indexOfSecondDefinition = definition.indexOf('2.');
+            
+            // Se "2." viene trovato, taglia la stringa fino a quel punto, altrimenti restituisci tutta la definizione
+            if (indexOfSecondDefinition !== -1) {
+                return definition.slice(0, indexOfSecondDefinition).trim();
+            } else {
+                return definition.trim(); // Restituisce la definizione completa se non esiste una seconda definizione
+            }
+        } else {
+            return 'Definizione non trovata';
+        }
+    } catch (error) {
+        console.error(error);
+        return 'Errore durante il recupero della definizione';
+    }
+}
+
+// Funzione per mostrare il messaggio finale con la definizione
+export async function showFinalAlert() {
+    const definition = await fetchWordDefinition(secretWord.toLowerCase());
+    alert(`La parola segreta era: ${secretWord}\nDefinizione: ${definition}`);
 }

@@ -1,4 +1,4 @@
-import { initializeDictionary, isValidWord, chooseRandomWord, getSecretWord } from './dictionary.js';
+import { initializeDictionary, isValidWord, chooseRandomWord, getSecretWord, fetchWordDefinition } from './dictionary.js';
 
 let validWords = [];
 let word = '';
@@ -111,19 +111,34 @@ function handleSpecialKeyPress(key) {
 }
 
 // Gestisci la pressione dei tasti della tastiera fisica
+let listenersAdded = false; // Flag per controllare se i listener sono già stati aggiunti
+
 function addKeyboardEventListeners() {
-    document.addEventListener('keydown', (e) => {
-        const key = e.key.toUpperCase();
-        if (key === 'ENTER') {
-            e.preventDefault(); // Previene il comportamento predefinito del tasto "Enter"
-            handleSpecialKeyPress('ENTER');
-        } else if (isLetterKey(key)) {
-            handleKeyPress(key);
-        } else if (key === 'BACKSPACE') {
-            handleSpecialKeyPress('BACKSPACE');
-        }
-    });
+    if (listenersAdded) return; // Se i listener sono già stati aggiunti, non aggiungerli di nuovo
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    listenersAdded = true; // Imposta il flag a true dopo aver aggiunto i listener
 }
+
+function handleKeyDown(e) {
+    const key = e.key.toUpperCase();
+    if (key === 'ENTER') {
+        e.preventDefault(); // Previene il comportamento predefinito del tasto "Enter"
+        handleSpecialKeyPress('ENTER');
+    } else if (isLetterKey(key)) {
+        handleKeyPress(key);
+    } else if (key === 'BACKSPACE') {
+        handleSpecialKeyPress('BACKSPACE');
+    }
+}
+
+// Funzione per rimuovere gli event listener (se necessario)
+function removeKeyboardEventListeners() {
+    document.removeEventListener('keydown', handleKeyDown);
+    listenersAdded = false; // Resetta il flag quando i listener vengono rimossi
+}
+
 
 // Verifica se il tasto premuto è una lettera
 function isLetterKey(key) {
@@ -134,7 +149,7 @@ function isLetterKey(key) {
 }
 
 // Controlla se la parola inserita è corretta
-function checkWord() {
+async function checkWord() {
     if (currentCol !== 5) {
         // Mostra un messaggio di avviso
         alert('Completa la parola prima di premere invio!');
@@ -193,16 +208,18 @@ function checkWord() {
     }
 
     if (guess === word) {
-        setTimeout(() => {
-            alert('Hai indovinato!');
+        setTimeout(async () => {
+            const definition = await fetchWordDefinition(word.toLowerCase());
+            alert(`Hai indovinato!\nLa parola era: ${word}\nDefinizione: ${definition}`);
             resetGame(); // Resetta il gioco
-        }, 500);
+        }, 200);
     } else {
         if (currentRow === MAX_ATTEMPTS - 1) {
-            setTimeout(() => {
-                alert('Hai perso! La parola era: ' + word);
+            setTimeout(async () => {
+                const definition = await fetchWordDefinition(word.toLowerCase());
+                alert(`Hai perso!\nLa parola era: ${word}\nDefinizione: ${definition}`);
                 resetGame(); // Resetta il gioco
-            }, 500);
+            }, 200);
         } else {
             alert('Riprova!');
         }
@@ -218,6 +235,7 @@ function checkWord() {
     // Svuota l'array delle celle animate
     animatedCells = [];
 }
+
 
 // Funzione per disabilitare una lettera
 function disableLetter(letter) {
@@ -276,7 +294,11 @@ function resetGame() {
         row3.removeChild(row3.firstChild);
     }
 
+    // Rimuovi gli event listener prima di reinizializzare il gioco
+    removeKeyboardEventListeners();
+
     initializeGame();
 }
+
 
 initializeGame();
