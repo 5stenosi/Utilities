@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link id="page-logo" rel="icon" href="assets/Abacus 1.svg">
+    <title>Abacus - Stenosi</title>
+
+</head>
+
+<body class="relative select-none">
+
+    <div id="wrapper"
+        class="bg-stone-200 dark:bg-neutral-900 flex justify-center items-center h-screen flex-col duration-1000">
+        <!-- BACK -->
+        <a href="index.html">
+            <button id="back"
+                class="absolute *:hover:-translate-x-2 top-5 left-5 border px-10 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+                <i
+                    class="fa-solid fa-arrow-left text-stone-600 dark:text-white text-xl translate-x-1 -translate-y-1 duration-1000"></i>
+                BACK
+            </button>
+        </a>
+
+        <div id="abacus" class="flex flex-col items-center gap-y-20 w-3/4">
+            <!-- Stecca 1 -->
+            <div
+                class="rod relative flex justify-start items-center w-full h-2 bg-stone-600 dark:bg-neutral-700 rounded-lg *:cursor-pointer duration-1000">
+                <div class="bead bg-red-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute" style="left: 0%;"></div>
+                <div class="bead bg-red-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute" style="left: 10%;"></div>
+                <div class="bead bg-red-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute" style="left: 20%;"></div>
+                <div class="bead bg-red-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute" style="left: 30%;"></div>
+                <div class="bead bg-red-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute" style="left: 40%;"></div>
+                <div class="bead bg-red-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute" style="left: 50%;"></div>
+                <div class="bead bg-red-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute" style="left: 60%;"></div>
+                <div class="bead bg-red-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute" style="left: 70%;"></div>
+                <div class="bead bg-red-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute" style="left: 80%;"></div>
+                <div class="bead bg-red-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute" style="left: 90%;"></div>
+            </div>
+            <!-- Stecca 2 -->
+            <div
+                class="rod relative flex justify-start items-center w-full h-2 bg-stone-600 dark:bg-neutral-700 rounded-lg *:cursor-pointer duration-1000">
+                <div class="bead bg-orange-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 0%;"></div>
+                <div class="bead bg-orange-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 10%;"></div>
+                <div class="bead bg-orange-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 20%;"></div>
+                <div class="bead bg-orange-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 30%;"></div>
+                <div class="bead bg-orange-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 40%;"></div>
+                <div class="bead bg-orange-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 50%;"></div>
+                <div class="bead bg-orange-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 60%;"></div>
+                <div class="bead bg-orange-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 70%;"></div>
+                <div class="bead bg-orange-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 80%;"></div>
+                <div class="bead bg-orange-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 90%;"></div>
+            </div>
+            <!-- Stecca 3 -->
+            <div
+                class="rod relative flex justify-start items-center w-full h-2 bg-stone-600 dark:bg-neutral-700 rounded-lg *:cursor-pointer duration-1000">
+                <div class="bead bg-yellow-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 0%;"></div>
+                <div class="bead bg-yellow-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 10%;"></div>
+                <div class="bead bg-yellow-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 20%;"></div>
+                <div class="bead bg-yellow-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 30%;"></div>
+                <div class="bead bg-yellow-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 40%;"></div>
+                <div class="bead bg-yellow-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 50%;"></div>
+                <div class="bead bg-yellow-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 60%;"></div>
+                <div class="bead bg-yellow-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 70%;"></div>
+                <div class="bead bg-yellow-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 80%;"></div>
+                <div class="bead bg-yellow-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 90%;"></div>
+            </div>
+            <!-- Stecca 4 -->
+            <div
+                class="rod relative flex justify-start items-center w-full h-2 bg-stone-600 dark:bg-neutral-700 rounded-lg *:cursor-pointer duration-1000">
+                <div class="bead bg-green-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 0%;"></div>
+                <div class="bead bg-green-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 10%;"></div>
+                <div class="bead bg-green-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 20%;"></div>
+                <div class="bead bg-green-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 30%;"></div>
+                <div class="bead bg-green-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 40%;"></div>
+                <div class="bead bg-green-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 50%;"></div>
+                <div class="bead bg-green-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 60%;"></div>
+                <div class="bead bg-green-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 70%;"></div>
+                <div class="bead bg-green-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 80%;"></div>
+                <div class="bead bg-green-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 90%;"></div>
+            </div>
+            <!-- Stecca 5 -->
+            <div
+                class="rod relative flex justify-start items-center w-full h-2 bg-stone-600 dark:bg-neutral-700 rounded-lg *:cursor-pointer duration-1000">
+                <div class="bead bg-blue-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 0%;"></div>
+                <div class="bead bg-blue-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 10%;"></div>
+                <div class="bead bg-blue-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 20%;"></div>
+                <div class="bead bg-blue-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 30%;"></div>
+                <div class="bead bg-blue-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 40%;"></div>
+                <div class="bead bg-blue-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 50%;"></div>
+                <div class="bead bg-blue-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 60%;"></div>
+                <div class="bead bg-blue-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 70%;"></div>
+                <div class="bead bg-blue-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 80%;"></div>
+                <div class="bead bg-blue-500 rounded-full w-12 h-12 border border-stone-600 dark:border-neutral-700 absolute left-0" style="left: 90%;"></div>
+            </div>
+        </div>
+
+        <!-- CHANGE THEME -->
+        <button id="change-theme"
+            class="absolute top-5 right-5 border px-10 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+            DARK
+        </button>
+    </div>
+
+    <script type="module" src="abacus.js"></script>
+    <script type="module" src="darkmode.js"></script>
+
+</body>
+
+</html>
