@@ -1,0 +1,28 @@
+A - Abacus♻️
+B - Battleship❓
+C - Calculator✅, Checkers❓, Connect four❓
+D - 
+E - 
+F - connect Four❓
+G - 
+H - Hangman❓
+I - 
+J - 
+K - 
+L - 
+M - Minesweeper❓
+N - Notes❓
+O - 
+P - Proportion✅
+Q - 
+R - 
+S - Sticky❓
+T - TicTacToe✅
+U - 
+V - 
+W - Wordle✅
+X - 
+Y - 
+Z - 
+
+Aggiustare il comportamento dei beads in abacus.js

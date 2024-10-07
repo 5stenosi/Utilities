@@ -37,15 +37,15 @@ export function chooseRandomWord(words) {
     return words[randomIndex];
 }
 
-// Funzione per inizializzare il dizionario
-export async function initializeDictionary() {
-    validWords = await fetchWords();
-    validWords = validWords.map(word => word.toUpperCase()); // Trasforma tutte le parole in maiuscolo
-    validWords.sort(); // Ordina l'array in ordine alfabetico
-    console.log('Valid Words (sorted):', validWords); // Debug
-    secretWord = chooseRandomWord(validWords);
-    console.log('Secret Word:', secretWord); // Debug
-}
+// // Funzione per inizializzare il dizionario
+// export async function initializeDictionary() {
+//     validWords = await fetchWords();
+//     validWords = validWords.map(word => word.toUpperCase()); // Trasforma tutte le parole in maiuscolo
+//     validWords.sort(); // Ordina l'array in ordine alfabetico
+//     console.log('Valid Words (sorted):', validWords); // Debug
+//     secretWord = chooseRandomWord(validWords);
+//     console.log('Secret Word:', secretWord); // Debug
+// }
 
 // Funzione getter per ottenere la parola segreta
 export function getSecretWord() {
@@ -98,4 +98,29 @@ export async function fetchWordDefinition(word) {
 export async function showFinalAlert() {
     const definition = await fetchWordDefinition(secretWord.toLowerCase());
     alert(`La parola segreta era: ${secretWord}\nDefinizione: ${definition}`);
+}
+
+// ARRAY DI PAROLE
+
+// Funzione per caricare le parole da un file di testo
+async function fetchWordsFromFile() {
+    try {
+        const response = await fetch('assets/words.txt'); // Sostituisci con il percorso del tuo file di testo
+        const text = await response.text();
+        const words = text.split('\n').map(word => word.trim()).filter(word => word.length === 5); // Filtra solo parole di 5 lettere
+        return words;
+    } catch (error) {
+        console.error('Error fetching words from file:', error);
+        return [];
+    }
+}
+
+// Modifica initializeDictionary per usare le parole dal file di testo
+export async function initializeDictionary() {
+    validWords = await fetchWordsFromFile();
+    validWords = validWords.map(word => word.toUpperCase());
+    validWords.sort(); // Ordina l'array
+    secretWord = chooseRandomWord(validWords);
+    console.log('Valid Words (sorted):', validWords);
+    console.log('Secret Word:', secretWord);
 }
