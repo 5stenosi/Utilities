@@ -27,25 +27,45 @@
             </button>
         </a>
 
-        <div class="absolute top-5 flex gap-5">
+        <div class="absolute top-5 flex items-center gap-5">
             <!-- CLEAR -->
-            <button
-            class="border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+            <button id="clear"
+                class="border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
                 CLEAR
             </button>
 
             <!-- NEW NOTE -->
-            <button
-            class="border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+            <button id="new-note"
+                class="border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
                 NEW NOTE
             </button>
+
+            <!-- COLORS -->
+            <div>
+                <button id="red"
+                    class="size-10 border border-stone-600 dark:border-neutral-500 bg-red-500 dark:bg-red-400 rounded-full transition-colors duration-1000"></button>
+                <button id="orange"
+                    class="size-10 border border-stone-600 dark:border-neutral-500 bg-orange-500 dark:bg-orange-400 rounded-full transition-colors duration-1000"></button>
+                <button id="yellow"
+                    class="size-10 border-4 border-stone-600 dark:border-neutral-500 bg-yellow-500 dark:bg-amber-400 rounded-full transition-colors duration-1000"></button>
+                <button id="green"
+                    class="size-10 border border-stone-600 dark:border-neutral-500 bg-green-500 dark:bg-lime-400 rounded-full transition-colors duration-1000"></button>
+                <button id="blue"
+                    class="size-10 border border-stone-600 dark:border-neutral-500 bg-blue-500 dark:bg-blue-400 rounded-full transition-colors duration-1000"></button>
+                <button id="purple"
+                    class="size-10 border border-stone-600 dark:border-neutral-500 bg-purple-500 dark:bg-purple-400 rounded-full transition-colors duration-1000"></button>
+            </div>
         </div>
 
         <!-- WHITEBOARD -->
         <div id="whiteboard"
             class="w-11/12 h-3/4 absolute bottom-14 rounded-2xl border-2 bg-stone-200 dark:bg-neutral-900 border-stone-400 dark:border-neutral-600 overflow-hidden duration-1000">
             <!-- STICKY NOTES -->
-            <div id="note" class="size-40  rounded-sm bg-black relative z-10 cursor-pointer"></div>
+            <div id="notes-group">
+            </div>
+            <!-- BIN -->
+            <i
+                class="hidden fa-regular fa-trash-can flex justify-center items-center absolute bottom-0 right-0 rounded-br-2xl size-24 bg-stone-200 dark:bg-neutral-900 text-stone-400 dark:text-neutral-600 text-7xl z-10 duration-1000"></i>
             <!-- BACKGROUND DOTS -->
             <div
                 class="absolute rounded-2xl inset-0 h-full bg-[radial-gradient(#a8a29e_1px,transparent_1px)] dark:bg-[radial-gradient(#525252_1px,transparent_1px)] [background-size:16px_16px] duration-1000 z-0">
@@ -58,6 +78,62 @@
             DARK
         </button>
     </div>
+
+    <!-- TEMPLATE FOR NOTES -->
+    <template id="note-template-red">
+        <div
+            class="size-40 p-2 group shadow-md active:shadow-lg outline-none rounded-sm relative z-20 cursor-pointer transition-colors duration-1000 text-center resize-none bg-red-500 dark:bg-red-400">
+            <i id="delete"
+                class="fa-solid fa-xmark absolute top-0 right-0 px-1.5 text-xl opacity-0 group-hover:opacity-100 duration-300"></i>
+            <textarea name="content"
+                class="size-full bg-transparent rounded-sm outline-none max-h-40 overflow-y-auto cursor-pointer resize-none"></textarea>
+        </div>
+    </template>
+    <template id="note-template-orange">
+        <div
+            class="size-40 p-2 group shadow-md active:shadow-lg outline-none rounded-sm relative z-20 cursor-pointer transition-colors duration-1000 text-center resize-none bg-orange-500 dark:bg-orange-400">
+            <i id="delete"
+                class="fa-solid fa-xmark absolute top-0 right-0 px-1.5 text-xl opacity-0 group-hover:opacity-100 duration-300"></i>
+            <textarea name="content"
+                class="size-full bg-transparent rounded-sm outline-none max-h-40 overflow-y-auto cursor-pointer resize-none"></textarea>
+        </div>
+    </template>
+    <template id="note-template-yellow">
+        <div
+            class="size-40 p-2 group shadow-md active:shadow-lg outline-none rounded-sm relative z-20 cursor-pointer transition-colors duration-1000 text-center resize-none bg-yellow-500 dark:bg-amber-400">
+            <i id="delete"
+                class="fa-solid fa-xmark absolute top-0 right-0 px-1.5 text-xl opacity-0 group-hover:opacity-100 duration-300"></i>
+            <textarea name="content"
+                class="size-full bg-transparent rounded-sm outline-none max-h-40 overflow-y-auto cursor-pointer resize-none"></textarea>
+        </div>
+    </template>
+    <template id="note-template-green">
+        <div
+            class="size-40 p-2 group shadow-md active:shadow-lg outline-none rounded-sm relative z-20 cursor-pointer transition-colors duration-1000 text-center resize-none bg-green-500 dark:bg-lime-400">
+            <i id="delete"
+                class="fa-solid fa-xmark absolute top-0 right-0 px-1.5 text-xl opacity-0 group-hover:opacity-100 duration-300"></i>
+            <textarea name="content"
+                class="size-full bg-transparent rounded-sm outline-none max-h-40 overflow-y-auto cursor-pointer resize-none"></textarea>
+        </div>
+    </template>
+    <template id="note-template-blue">
+        <div
+            class="size-40 p-2 group shadow-md active:shadow-lg outline-none rounded-sm relative z-20 cursor-pointer transition-colors duration-1000 text-center resize-none bg-blue-500 dark:bg-blue-400">
+            <i id="delete"
+                class="fa-solid fa-xmark absolute top-0 right-0 px-1.5 text-xl opacity-0 group-hover:opacity-100 duration-300"></i>
+            <textarea name="content"
+                class="size-full bg-transparent rounded-sm outline-none max-h-40 overflow-y-auto cursor-pointer resize-none"></textarea>
+        </div>
+    </template>
+    <template id="note-template-purple">
+        <div
+            class="size-40 p-2 group shadow-md active:shadow-lg outline-none rounded-sm relative z-20 cursor-pointer transition-colors duration-1000 text-center resize-none bg-purple-500 dark:bg-purple-400">
+            <i id="delete"
+                class="fa-solid fa-xmark absolute top-0 right-0 px-1.5 text-xl opacity-0 group-hover:opacity-100 duration-300"></i>
+            <textarea name="content"
+                class="size-full bg-transparent rounded-sm outline-none max-h-40 overflow-y-auto cursor-pointer resize-none"></textarea>
+        </div>
+    </template>
 
     <script type="module" src="notes.js"></script>
     <script type="module" src="darkmode.js"></script>
