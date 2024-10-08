@@ -4,19 +4,19 @@ C - Calculator✅, Checkers❓, Connect four❓
 D - 
 E - 
 F - connect Four❓
-G - 
-H - Hangman❓
+G - Gravity❓
+H - Hangman❓, Hourglass❓
 I - 
 J - 
 K - 
 L - 
 M - Minesweeper❓
-N - Notes❓
+N - Notes✅
 O - 
 P - Proportion✅
 Q - 
 R - 
-S - Sticky❓
+S - Sundial❓
 T - TicTacToe✅
 U - 
 V - 
@@ -26,3 +26,4 @@ Y -
 Z - 
 
 Aggiustare il comportamento dei beads in abacus.js
+Aggiustare notes.html per il numero di caratteri massimo/righe massime
