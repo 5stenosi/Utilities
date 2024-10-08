@@ -27,3 +27,4 @@ Z -
 
 Aggiustare il comportamento dei beads in abacus.js
 Aggiustare notes.html per il numero di caratteri massimo/righe massime
+Creare un vettoriale per sundial.html

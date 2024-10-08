@@ -16,26 +16,24 @@
 <body class="relative select-none overflow-hidden">
 
     <div id="wrapper"
-        class="bg-stone-200 dark:bg-neutral-900 flex justify-center items-center h-screen flex-col duration-1000">
+        class="bg-stone-200 dark:bg-neutral-900 flex justify-end items-center h-screen flex-col duration-1000">
+
         <!-- BACK -->
         <a href="index.html">
             <button id="back"
-                class="absolute *:hover:-translate-x-2 top-5 left-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+                class="absolute top-5 left-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
                 <i
                     class="fa-solid fa-arrow-left text-stone-600 dark:text-white text-xl translate-x-1 -translate-y-1 duration-1000"></i>
                 BACK
             </button>
         </a>
 
+        <!-- TIME -->
+        <h1 id="time" class="absolute text-stone-600 dark:text-white text-7xl top-64 sm:top-60 md:top-48 lg:top-32 xl:top-20 transition-all duration-1000"></h1>
+
         <!-- SUN/MOON -->
         <img src="assets/Sphere.svg" id="sphere"
-            class="bg-gradient-to-b from-red-500 rounded-full size-[25rem] sm:size-[30rem] md:size-[40rem] lg:size-[60rem] xl:size-[75rem] absolute bottom-0">
-
-        <!-- CHANGE THEME -->
-        <button id="change-theme"
-            class="absolute top-5 right-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
-            DARK
-        </button>
+            class="size-[25rem] sm:size-[30rem] md:size-[40rem] lg:size-[60rem] xl:size-[70rem] absolute -bottom-[12.5rem] sm:-bottom-[15rem] md:-bottom-[20rem] lg:-bottom-[30rem] xl:-bottom-[35rem] transition-all duration-1000">
     </div>
 
     <script type="module" src="sundial.js"></script>

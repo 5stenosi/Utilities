@@ -19,10 +19,15 @@ function updateCellColors(isDark) {
 }
 
 // Funzione per cambiare il tema e salvare lo stato nel localStorage
-function toggleTheme() {
+export function toggleTheme() {
     document.documentElement.classList.toggle('dark');
     const isDark = document.documentElement.classList.contains('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    
+    // Non salvare il tema nel localStorage se siamo su sundial.html
+    if (!window.location.pathname.endsWith('sundial.html')) {
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+    
     document.getElementById('change-theme').textContent = isDark ? 'DARK' : 'LIGHT';
 
     // Aggiorna il colore delle celle in base al tema
@@ -78,8 +83,10 @@ function initializeTheme() {
     }
 }
 
-// Event listener per il bottone di cambio tema
-document.getElementById('change-theme').addEventListener('click', toggleTheme);
+// Aggiungi l'event listener per il bottone di cambio tema solo se non siamo su sundial.html
+if (!window.location.pathname.endsWith('sundial.html')) {
+    document.getElementById('change-theme').addEventListener('click', toggleTheme);
+}
 
 // Applica il tema salvato prima che la pagina venga renderizzata
 (function () {
