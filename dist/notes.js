@@ -34,8 +34,8 @@ function createNewNote() {
 
     // Ottieni le dimensioni della whiteboard
     const whiteboardRect = whiteboard.getBoundingClientRect();
-    const noteWidth = 200; // Larghezza stimata della nota
-    const noteHeight = 150; // Altezza stimata della nota
+    const noteWidth = 160; // Larghezza stimata della nota
+    const noteHeight = 160; // Altezza stimata della nota
 
     // Calcola una posizione casuale all'interno dei limiti della whiteboard
     const randomLeft = Math.random() * (whiteboardRect.width - noteWidth);
@@ -57,7 +57,7 @@ function createNewNote() {
 // Imposta il colore selezionato e aggiorna il bordo dei bottoni
 function setColor(color, button) {
     selectedColor = color;
-    colorButtons.forEach(btn => btn.classList.remove('border', 'border-4'));
+    colorButtons.forEach(btn => btn.classList.remove('border-4'));
     button.classList.add('border-4');
 }
 
@@ -69,18 +69,15 @@ colorButtons.forEach(button => {
     });
 });
 
-// Imposta il colore di default (giallo)
-document.getElementById('yellow').classList.add('border-4');
-
 // Imposta il trascinamento per una nota
 function setupNoteDragging(noteElement) {
     let isDragging = false;
     let offsetX, offsetY;
 
     noteElement.addEventListener('mousedown', (e) => {
+        e.preventDefault(); // Prevenire il comportamento predefinito
         isDragging = true;
         const noteRect = noteElement.getBoundingClientRect();
-        const whiteboardRect = whiteboard.getBoundingClientRect();
         offsetX = e.clientX - noteRect.left;
         offsetY = e.clientY - noteRect.top;
         noteElement.style.cursor = 'grabbing';
@@ -118,6 +115,9 @@ function setupNoteDragging(noteElement) {
     // Aggiungi un evento di input al textarea per salvare il contenuto quando viene modificato
     const textarea = noteElement.querySelector('textarea');
     textarea.addEventListener('input', () => {
+        if (textarea.value.length > 100) {
+            textarea.value = textarea.value.substring(0, 100); // Limita il numero di caratteri a 20
+        }
         saveNotePosition(noteElement); // Salva il contenuto della nota ogni volta che viene modificato
     });
 

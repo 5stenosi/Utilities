@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
+
+    <link id="page-logo" rel="icon" href="assets/Gravity 1.svg">
+    <title>Gravity - Stenosi</title>
+
+</head>
+
+<body class="relative select-none">
+
+    <div id="wrapper"
+        class="bg-stone-200 dark:bg-neutral-900 flex justify-center items-center h-screen flex-col duration-1000">
+        
+        <!-- BACK -->
+        <a href="index.html">
+            <button id="back"
+                class="absolute *:hover:-translate-x-2 top-5 left-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+                <i
+                    class="fa-solid fa-arrow-left text-stone-600 dark:text-white text-xl translate-x-1 -translate-y-1 duration-1000"></i>
+                BACK
+            </button>
+        </a>
+
+        <div class="absolute top-5 flex items-center gap-5">
+            <!-- CLEAR -->
+            <button id="clear"
+                class="border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+                CLEAR
+            </button>
+
+            <!-- NEW SHAPE -->
+            <button id="new-shape"
+                class="border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+                NEW SHAPE
+            </button>
+
+            <!-- CIRCLE -->
+            <button id="circle-shape"
+                class="size-10 rounded-full border-2 border-4 border-stone-600 dark:border-neutral-500 transition-colors duration-1000"></button>
+
+            <!-- SQUARE -->
+            <button id="square-shape"
+                class="size-10 border-2 border-stone-600 dark:border-neutral-500 transition-colors duration-1000"></button>
+
+        </div>
+
+        <!-- PLAYGROUND -->
+        <div id="playground"
+            class="w-11/12 h-3/4 absolute bottom-14 rounded-2xl border-2 bg-stone-200 dark:bg-neutral-900 border-stone-400 dark:border-neutral-600 overflow-hidden duration-1000">
+        </div>
+
+        <!-- CHANGE THEME -->
+        <button id="change-theme"
+            class="absolute top-5 right-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
+            DARK
+        </button>
+    </div>
+
+    <!-- TEMPLATE FOR NOTES -->
+    <template id="circle">
+        <div class="size-20 rounded-full bg-stone-400 dark:bg-neutral-500 transition-colors cursor-pointer duration-1000">
+        </div>
+    </template>
+    <template id="square">
+        <div class="size-20 bg-stone-400 dark:bg-neutral-500 transition-colors cursor-pointer duration-1000"></div>
+    </template>
+
+    <script type="module" src="gravity.js"></script>
+    <script type="module" src="darkmode.js"></script>
+
+</body>
+
+</html>
