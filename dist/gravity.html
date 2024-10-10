@@ -1,80 +1,70 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
-
-    <link id="page-logo" rel="icon" href="assets/Gravity 1.svg">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Gravity - Stenosi</title>
-
 </head>
 
-<body class="relative select-none">
+<body>
 
-    <div id="wrapper"
-        class="bg-stone-200 dark:bg-neutral-900 flex justify-center items-center h-screen flex-col duration-1000">
-        
-        <!-- BACK -->
-        <a href="index.html">
-            <button id="back"
-                class="absolute *:hover:-translate-x-2 top-5 left-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
-                <i
-                    class="fa-solid fa-arrow-left text-stone-600 dark:text-white text-xl translate-x-1 -translate-y-1 duration-1000"></i>
-                BACK
-            </button>
-        </a>
+    <script src="matter.js"></script>
+    <script>
+        let engine = Matter.Engine.create();
+        engine.world.gravity.y = 1;
 
-        <div class="absolute top-5 flex items-center gap-5">
-            <!-- CLEAR -->
-            <button id="clear"
-                class="border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
-                CLEAR
-            </button>
+        let screenWidth = window.innerWidth;
+        let screenHeight = window.innerHeight;
 
-            <!-- NEW SHAPE -->
-            <button id="new-shape"
-                class="border px-5 py-3 rounded-lg border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
-                NEW SHAPE
-            </button>
+        let render = Matter.Render.create({
+            element: document.body,
+            engine: engine,
+            options: {
+                width: screenWidth,
+                height: screenHeight,
+                wireframes: false
+            }
+        });
 
-            <!-- CIRCLE -->
-            <button id="circle-shape"
-                class="size-10 rounded-full border-2 border-4 border-stone-600 dark:border-neutral-500 transition-colors duration-1000"></button>
+        let groundWidth = screenWidth;
+        let groundHeight = 100;
+        let groundX = screenWidth / 2;
+        let groundY = screenHeight + groundHeight / 2;
 
-            <!-- SQUARE -->
-            <button id="square-shape"
-                class="size-10 border-2 border-stone-600 dark:border-neutral-500 transition-colors duration-1000"></button>
+        let ground = Matter.Bodies.rectangle(groundX, groundY, groundWidth, groundHeight, { isStatic: true });
 
-        </div>
+        let mouse = Matter.Mouse.create(render.canvas);
+        let mouseConstraint = Matter.MouseConstraint.create(engine, {
+            mouse: mouse,
+            constraint: {
+                stiffness: 0.2,
+                render: { visible: false }
+            }
+        });
+        render.mouse = mouse;
 
-        <!-- PLAYGROUND -->
-        <div id="playground"
-            class="w-11/12 h-3/4 absolute bottom-14 rounded-2xl border-2 bg-stone-200 dark:bg-neutral-900 border-stone-400 dark:border-neutral-600 overflow-hidden duration-1000">
-        </div>
+        let stack = Matter.Composites.stack(200, 200, 4, 4, 0, 0, function (x, y) {
+            return Matter.Bodies.rectangle(x, y, 40, 40);
+        });
 
-        <!-- CHANGE THEME -->
-        <button id="change-theme"
-            class="absolute top-5 right-5 border px-5 py-3 rounded-2xl border-stone-600 dark:border-neutral-700 text-stone-600 dark:text-white text-3xl hover:bg-stone-400 dark:hover:bg-neutral-500 duration-1000">
-            DARK
-        </button>
-    </div>
+        Matter.World.add(engine.world, [ground, stack, mouseConstraint]);
 
-    <!-- TEMPLATE FOR NOTES -->
-    <template id="circle">
-        <div class="size-20 rounded-full bg-stone-400 dark:bg-neutral-500 transition-colors cursor-pointer duration-1000">
-        </div>
-    </template>
-    <template id="square">
-        <div class="size-20 bg-stone-400 dark:bg-neutral-500 transition-colors cursor-pointer duration-1000"></div>
-    </template>
+        let runner = Matter.Runner.create();
+        Matter.Runner.run(runner, engine);
 
-    <script type="module" src="gravity.js"></script>
-    <script type="module" src="darkmode.js"></script>
+        Matter.Render.run(render);
+
+        // Rilevamento del passaggio del mouse
+        Matter.Events.on(mouseConstraint, 'mousemove', function (event) {
+            let foundBodies = Matter.Query.point(stack.bodies, event.mouse.position);
+            if (foundBodies.length > 0) {
+                render.canvas.style.cursor = 'pointer';
+            } else {
+                render.canvas.style.cursor = 'default';
+            }
+        });
+    </script>
 
 </body>
 
